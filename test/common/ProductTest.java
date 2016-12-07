@@ -41,17 +41,25 @@ public class ProductTest {
      * Requires unitCost to be a value between 0 and 10_000.
      */
     @Test
-    public void testSetUnitCostNotLessThanZero() {
+    public void testSetUnitCostIllegalValues() {
         Product product = new Product();
-        double[] testValues = {-1000, -500,-100, -10, -1};
+        double[] testValues = {-1000, -500,-100, -10, -1, 10_001, 20_000};
         for (double v: testValues){
             try{
                 product.setUnitCost(v);
-                fail("Value Cannot be less than 0");
             }
             catch(IllegalArgumentException iae){
                 //OK
             }
+        }
+    }
+    
+    @Test
+    public void testSetUnitCostLegalValues() {
+        Product product = new Product();
+        double[] testValues = {4_000, 10, 342};
+        for (double v: testValues){
+           product.setUnitCost(v);
         }
     }
     
